@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:binding="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="ViewModel"
+            type="com.alipayjf.game.ui.legalize.LegalizeViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="#979797"
+                android:layout_marginTop="50dp"
+                android:text="点击下方图片上传微信收款二维码"/>
+
+            <com.alipayjf.game.custom_view.SelectPictureView
+                android:id="@+id/wxImg"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="200dp"
+                binding:onClickCommand="@{ViewModel.WXClick}"
+                android:layout_height="200dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="#979797"
+                android:text="点击下方图片上传支付宝收款二维码"/>
+
+            <com.alipayjf.game.custom_view.SelectPictureView
+                android:id="@+id/applyImg"
+                android:layout_gravity="center_horizontal"
+                binding:onClickCommand="@{ViewModel.apliyClick}"
+                android:layout_width="200dp"
+                android:layout_height="200dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:background="@drawable/shape_radius5_13b6a5"
+                binding:onClickCommand="@{ViewModel.submitClick}"
+                android:text="确定"/>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</layout>

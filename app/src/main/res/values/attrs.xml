@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--自定义title-->
+    <declare-styleable name="TitleView">
+        <attr name="left_image" format="reference"/>
+        <attr name="center_image" format="reference"/>
+        <attr name="right_image" format="reference"/>
+
+        <attr name="left_text" format="reference|string"/>
+        <attr name="center_text" format="reference|string"/>
+        <attr name="right_text" format="reference|string"/>
+        <attr name="line_show" format="boolean"/>
+    </declare-styleable>
+
+    <!--自定义title-->
+    <declare-styleable name="itemColum">
+        <attr name="leftImage" format="reference"/>
+        <attr name="rightImage" format="reference"/>
+
+        <attr name="leftText" format="reference|string"/>
+        <attr name="rightText" format="reference|string"/>
+        <attr name="lineShow" format="boolean"/>
+    </declare-styleable>
+
+    <!--加載動畫-->
+    <declare-styleable name="LoadingView">
+        <attr name="loading_renderer">
+            <!--circle rotate-->
+            <enum name="MaterialLoadingRenderer" value="0"/>
+            <enum name="LevelLoadingRenderer" value="1"/>
+            <enum name="WhorlLoadingRenderer" value="2"/>
+            <enum name="GearLoadingRenderer" value="3"/>
+            <!--circle jump-->
+            <enum name="SwapLoadingRenderer" value="4"/>
+            <enum name="GuardLoadingRenderer" value="5"/>
+            <enum name="DanceLoadingRenderer" value="6"/>
+            <enum name="CollisionLoadingRenderer" value="7"/>
+            <!--Scenery-->
+            <enum name="DayNightLoadingRenderer" value="8"/>
+            <enum name="ElectricFanLoadingRenderer" value="9"/>
+            <!--Animal-->
+            <enum name="FishLoadingRenderer" value="10"/>
+            <enum name="GhostsEyeLoadingRenderer" value="11"/>
+            <!--Goods-->
+            <enum name="BalloonLoadingRenderer" value="12"/>
+            <enum name="WaterBottleLoadingRenderer" value="13"/>
+            <!--ShapeChange-->
+            <enum name="CircleBroodLoadingRenderer" value="14"/>
+            <enum name="CoolWaitLoadingRenderer" value="15"/>
+        </attr>
+    </declare-styleable>
+
+    <!--自定义气泡-->
+    <declare-styleable name="bubble">
+        <attr name="shadowColor" format="color" />
+        <attr name="padding" format="dimension" />
+        <attr name="strokWidth" format="float" />
+        <attr name="corneRadius" format="float" />
+        <attr name="halfBaseOfLeg" format="dimension" />
+    </declare-styleable>
+</resources>

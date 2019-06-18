@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_main"
+    app:startDestination="@id/homePage">
+    <fragment
+        android:id="@+id/homePage"
+        android:name="com.alipayjf.game.ui.mainpage.home.HomeFragment"
+        android:label="homePage"/>
+    <fragment
+        android:id="@+id/personPage"
+        android:name="com.alipayjf.game.ui.mainpage.personal.PersonFragment"
+        android:label="personPage"/>
+</navigation>
