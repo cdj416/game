@@ -19,7 +19,7 @@ public class HomeAdapter extends BaseQuickAdapter<HomeBean.ResultBean.ListBean,B
     protected void convert(BaseViewHolder helper, HomeBean.ResultBean.ListBean item) {
         try {
             helper.setText(R.id.payMethod,getPayMethod(item.getPayType()))
-                    .setText(R.id.payPrice, CalculationUtil.divide(item.getTotalFee()+"","100",2))
+                    .setText(R.id.payPrice, CalculationUtil.getPrice(item.getTotalFee()))
                     .setText(R.id.payDate,item.getCreatedTime())
                     .setText(R.id.payStatic,getStatus(item.getStatus()));
 
@@ -38,7 +38,7 @@ public class HomeAdapter extends BaseQuickAdapter<HomeBean.ResultBean.ListBean,B
                 payStatusView.setVisibility(View.VISIBLE);
             }
             helper.addOnClickListener(R.id.submitPrice);
-        } catch (IllegalAccessException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

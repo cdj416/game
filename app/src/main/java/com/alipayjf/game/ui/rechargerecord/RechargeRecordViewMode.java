@@ -43,7 +43,7 @@ public class RechargeRecordViewMode extends CustomViewModel {
     /*
     * 获取数据
     * */
-    private void getData(){
+    public void getData(){
         clearParams().setParams("userId",userSession.getUserId()+"");
         clearHeadParams().setHeadParams("Content-Type","application/json")
                 .setHeadParams("Access-Token",userSession.getToken());
@@ -55,9 +55,17 @@ public class RechargeRecordViewMode extends CustomViewModel {
         if(data instanceof RechargeRecordBean){
             RechargeRecordBean bean = (RechargeRecordBean)data;
             if(bean.getCode() == 200){
-                adapter.setNewData(bean.getResult().getList());
+                if(bean.getResult().getList() != null && bean.getResult().getList().size() > 0){
+                    adapter.setNewData(bean.getResult().getList());
+                    mActivity.setPromtView(CustomActivity.SHOW_DATA);
+                }
+                if(bean.getResult() == null || bean.getResult().getList() == null || bean.getResult().getList().size() <= 0){
+                    mActivity.setPromtView(CustomActivity.SHOW_EMPTY);
+                }
+
             }else{
                 LemonBubble.showRight(mActivity,bean.getMessage(),2000);
+                mActivity.setPromtView(CustomActivity.SHOW_ERR);
             }
         }
     }

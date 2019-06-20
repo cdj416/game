@@ -1,5 +1,7 @@
 package com.alipayjf.game.util;
 
+import android.util.Log;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -60,6 +62,7 @@ public class CalculationUtil {
      * @param value2 除数
      */
     public static String divide(String value1, String value2) throws IllegalAccessException {
+        Log.e("cdj","========"+divide(value1, value2, 0, null));
         return divide(value1, value2, 0, null);
     }
 
@@ -198,8 +201,8 @@ public class CalculationUtil {
     * */
     public static String getPrice(Object price){
         try {
-            return subZeroAndDot(divide(price.toString(),"100",2));
-        } catch (IllegalAccessException e) {
+            return subZeroAndDot((Long.valueOf(price.toString())/100)+"");
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return "0";

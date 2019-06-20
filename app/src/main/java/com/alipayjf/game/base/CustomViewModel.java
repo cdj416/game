@@ -156,6 +156,7 @@ public abstract class CustomViewModel implements RetrofitListener {
      * */
     @Override
     public void closeRefresh() {
+        mActivity.closeRefresh();
     }
 
     /*

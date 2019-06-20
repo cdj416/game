@@ -70,9 +70,16 @@ public class ReflectiveRecordViewModel extends CustomViewModel {
         if(data instanceof ReflectiveRecordBean){
             bean = (ReflectiveRecordBean)data;
             if(bean.getCode() == 200){
-                adapter.setNewData(bean.getResult().getList());
+                if(bean.getResult().getList() != null && bean.getResult().getList().size() > 0){
+                    adapter.setNewData(bean.getResult().getList());
+                    mActivity.setPromtView(CustomActivity.SHOW_DATA);
+                }
+                if(bean.getResult() == null || bean.getResult().getList() == null || bean.getResult().getList().size() <= 0){
+                    mActivity.setPromtView(CustomActivity.SHOW_EMPTY);
+                }
             }else{
                 LemonBubble.showRight(mActivity,bean.getMessage(),2000);
+                mActivity.setPromtView(CustomActivity.SHOW_ERR);
             }
         }
     }

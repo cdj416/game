@@ -1,12 +1,9 @@
 package com.alipayjf.game.ui.personinfo;
 
-import android.util.Log;
-
 import com.alipayjf.game.base.Constants;
 import com.alipayjf.game.base.Controller;
 import com.alipayjf.game.base.CustomActivity;
 import com.alipayjf.game.base.CustomViewModel;
-import com.alipayjf.game.base.MyApplication;
 import com.alipayjf.game.databinding.ActivityPersoninfoBinding;
 import com.alipayjf.game.entity.BaseBean;
 import com.alipayjf.game.entity.UserInfoBean;
@@ -103,10 +100,10 @@ public class PersonInfoViewModel extends CustomViewModel {
             LemonBubble.showError(mActivity,"请填写开户行！",2000);
             return false;
         }
-        if(!isMaxPrice(binding.infoManPrice.getText().toString())){
+        /*if(!isMaxPrice(binding.infoManPrice.getText().toString())){
             LemonBubble.showError(mActivity,"请填写正确最大金额！",2000);
             return false;
-        }
+        }*/
         if(!isMinPrice(binding.infoMinPrice.getText().toString())){
             LemonBubble.showError(mActivity,"请填写正确最小金额！",2000);
             return false;
@@ -122,8 +119,8 @@ public class PersonInfoViewModel extends CustomViewModel {
         userInfoBean.getResult().setCardNo(binding.infoCard.getText().toString());
         userInfoBean.getResult().setBankName(binding.infoCardName.getText().toString());
         userInfoBean.getResult().setDepositBankName(binding.infoCardAddress.getText().toString());
-        userInfoBean.getResult().setMinFee(Integer.valueOf(binding.infoMinPrice.getText().toString()));
-        userInfoBean.getResult().setMaxFee(Integer.valueOf(binding.infoManPrice.getText().toString()));
+        userInfoBean.getResult().setMinFee(Long.valueOf(binding.infoMinPrice.getText().toString()));
+        userInfoBean.getResult().setMaxFee(Long.valueOf(binding.infoManPrice.getText().toString()));
     }
 
     @Override
@@ -137,9 +134,9 @@ public class PersonInfoViewModel extends CustomViewModel {
         if(data instanceof BaseBean){
             BaseBean bean = (BaseBean)data;
             if(bean.getCode() == 200){
-                Log.e("cdj","======"+ MyApplication.getInstance().getApplicationContext());
-                //new PromptDialog().showText(MyApplication.getInstance().getApplicationContext(),"测试");
-                mActivity.finish();
+                mActivity.showSuccess(bean.getMessage());
+            }else{
+                mActivity.showErr(bean.getMessage());
             }
         }
     }
@@ -171,15 +168,15 @@ public class PersonInfoViewModel extends CustomViewModel {
     * 判断最小金额
     * */
     private boolean isMinPrice(String price){
-        int minPrice;
+        Long minPrice;
         try {
-            minPrice = Integer.valueOf(price);
+            minPrice = Long.valueOf(price);
             if(minPrice <= 0){
                 return false;
             }
-            if(minPrice > Integer.valueOf(binding.infoManPrice.getText().toString())){
+            /*if(minPrice > Integer.valueOf(binding.infoManPrice.getText().toString())){
                 return false;
-            }
+            }*/
         }catch (Exception e){
             return false;
         }

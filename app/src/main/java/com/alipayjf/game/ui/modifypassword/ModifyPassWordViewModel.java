@@ -53,7 +53,7 @@ public class ModifyPassWordViewModel extends CustomViewModel {
         if(data instanceof BaseBean){
             BaseBean bean = (BaseBean)data;
             if(bean.getCode() == 200){
-                mActivity.finish();
+                mActivity.showSuccess(bean.getMessage());
             }else{
                 LemonBubble.showError(mActivity,bean.getMessage(),2000);
             }

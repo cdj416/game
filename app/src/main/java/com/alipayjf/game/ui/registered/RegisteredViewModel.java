@@ -104,9 +104,7 @@ public class RegisteredViewModel extends CustomViewModel {
         if(data instanceof RegisteredBean){
             RegisteredBean registeredBean = (RegisteredBean)data;
             if(registeredBean.getCode() == 200){
-                LemonBubble.hide();
-                mActivity.finish();
-                //LemonBubble.showRight(mActivity,"注册成功！",2000);
+                mActivity.showSuccess("注册成功！");
             }else{
                 LemonBubble.showError(mActivity,registeredBean.getMessage(),2000);
             }

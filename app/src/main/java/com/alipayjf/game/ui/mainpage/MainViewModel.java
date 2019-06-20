@@ -1,21 +1,14 @@
 package com.alipayjf.game.ui.mainpage;
 
-import android.util.Log;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.alipayjf.game.R;
-import com.alipayjf.game.base.Constants;
 import com.alipayjf.game.base.CustomActivity;
 import com.alipayjf.game.base.CustomViewModel;
 import com.alipayjf.game.databinding.ActivityMainBinding;
 import com.alipayjf.game.util.BottomNavigationUtils;
-import com.alipayjf.game.util.WsListener;
-import com.neovisionaries.ws.client.WebSocket;
-import com.neovisionaries.ws.client.WebSocketFactory;
-
-import java.io.IOException;
 
 import me.majiajie.pagerbottomtabstrip.NavigationController;
 

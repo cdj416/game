@@ -44,4 +44,13 @@ public class WebSocketUtil{
         }
         return true;
     }
+
+    /*
+    * 关闭连接
+    * */
+    public void closeConnection(){
+        if(ws != null && ws.isOpen()){
+            ws.sendClose();
+        }
+    }
 }

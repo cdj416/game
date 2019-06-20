@@ -1,6 +1,9 @@
 package com.alipayjf.game.base;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -8,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.alipayjf.game.R;
@@ -19,11 +23,14 @@ import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import net.lemonsoft.lemonbubble.LemonBubble;
+
 import io.reactivex.annotations.Nullable;
 
 
 public abstract class CustomActivity extends AppCompatActivity {
 
+    private Handler handler = new Handler();
     //加载器
     public View mView;
     //父类中的标题栏
@@ -38,9 +45,13 @@ public abstract class CustomActivity extends AppCompatActivity {
     //页面效果
     private RelativeLayout load_box;
     private TextView isEmpty,isTvErr;
-    public final int SHOW_ERR = 0X1;//显示错误页面
-    public final int SHOW_EMPTY = 0X2;//显示空数据页面
-    public final int SHOW_DATA = 0X3;//显示数据页面
+    public static final int SHOW_ERR = 0X1;//显示错误页面
+    public static final int SHOW_EMPTY = 0X2;//显示空数据页面
+    public static final int SHOW_DATA = 0X3;//显示数据页面
+
+    //跳转处理需要的对象
+    private Class<?> clz;
+    private Bundle bundle;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,10 +71,10 @@ public abstract class CustomActivity extends AppCompatActivity {
 
         //加载提示布局
         initPrompt();
-        //加载子布局视图
-        initView();
         //初始化刷新控件
         setOnRefresh();
+        //加载子布局视图
+        initView();
     }
 
     /*
@@ -131,7 +142,7 @@ public abstract class CustomActivity extends AppCompatActivity {
         return new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                //lazyLoad();
+                refreshData();
             }
         };
     }
@@ -175,6 +186,12 @@ public abstract class CustomActivity extends AppCompatActivity {
      * */
     protected abstract void initView();
 
+    /*
+    * 刷新调用的函数
+    * */
+    public void refreshData(){
+
+    }
 
     /*
      * 显示页面效果切换
@@ -209,4 +226,62 @@ public abstract class CustomActivity extends AppCompatActivity {
     public void openLoading(){
         loading.setVisibility(View.VISIBLE);
     }
+    /*
+     * 关闭刷新的回调方法
+     * */
+    public void closeRefresh() {
+        if(refresh != null){
+            refresh.finishRefresh();
+        }
+    }
+
+    /**
+     * 跳转页面
+     */
+    public void startActivity() {
+        Intent intent = new Intent();
+        intent.setClass(this,clz);
+        if(bundle != null){
+            intent.putExtra("bundle",bundle);
+        }
+        startActivity(intent);
+    }
+
+    /*
+    * 成功提示弹框，并过三秒关掉当前activity
+    * */
+    public void showSuccess(String message){
+        LemonBubble.showRight(this,message,2000);
+        handler.postDelayed(runnableClose, 2000);
+    }
+    /*
+    * 成功提示弹框，并过三秒关掉当前activity
+    * */
+    public void showSuccess(String message,Class<?> clz, Bundle bundle){
+        this.clz = clz;
+        this.bundle = bundle;
+        LemonBubble.showRight(this,message,2000);
+        handler.postDelayed(runnableClose, 2000);
+    }
+
+    /*
+    * 错误提示
+    * */
+    public void showErr(String message){
+        LemonBubble.showError(this,message,2000);
+    }
+
+    /*
+    * 关闭当前页面
+    * */
+    Runnable runnableClose = new Runnable() {
+        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+        @Override
+        public void run() {
+            if(clz != null){
+                startActivity();
+            }
+            finish();
+        }
+    };
 }

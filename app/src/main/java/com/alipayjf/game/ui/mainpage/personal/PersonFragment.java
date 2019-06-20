@@ -152,7 +152,15 @@ public class PersonFragment extends CustomFragment implements View.OnClickListen
 
     @Override
     public void dialogClick(View v) {
-        Intent intent = new Intent(getContext(), LegalizeActivity.class);
-        startActivity(intent);
+        if(v instanceof TextView){
+            TextView textView = (TextView)v;
+            if(textView.getText().equals("前往认证")){
+                Intent intent = new Intent(getContext(), LegalizeActivity.class);
+                startActivity(intent);
+            }
+            if(textView.getText().equals("刷新")){
+                getUserInfo();
+            }
+        }
     }
 }

@@ -33,7 +33,7 @@ public class ReflectiveRecordAdapter extends BaseQuickAdapter<ReflectiveRecordBe
     }
 
     private String getStatus(int status){
-        if(status == 0)return "未完成";
+        if(status == 0)return "审核中";
         if(status == 1)return "已完成";
         if(status == 2)return "提现中";
         return "未知状态";

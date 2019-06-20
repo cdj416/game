@@ -19,7 +19,7 @@ public class RechargeRecordAdapter extends BaseQuickAdapter<RechargeRecordBean.R
         try {
             helper.setText(R.id.orderNum,"订单号："+item.getId())
                     .setText(R.id.orderTime,item.getCreatedTime())
-                    .setText(R.id.orderPrice, CalculationUtil.divide(item.getChargeFee()+"","100",2)+"元")
+                    .setText(R.id.orderPrice, CalculationUtil.getPrice(item.getChargeFee())+"元")
                     .setText(R.id.orderStatus,getStatus(item.getStatus()));
 
             TextView tv = helper.getView(R.id.orderStatus);
@@ -28,13 +28,13 @@ public class RechargeRecordAdapter extends BaseQuickAdapter<RechargeRecordBean.R
             }else{
                 tv.setTextColor(0xff000000);
             }
-        } catch (IllegalAccessException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private String getStatus(int status){
-        if(status == 0)return "未完成";
+        if(status == 0)return "审核中";
         if(status == 1)return "已完成";
         return "未知状态";
     }

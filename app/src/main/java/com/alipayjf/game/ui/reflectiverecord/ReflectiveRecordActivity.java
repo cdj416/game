@@ -13,6 +13,7 @@ public class ReflectiveRecordActivity extends CustomActivity {
     @Override
     protected void initView() {
         setTitle("提现记录");
+        setEnableRefresh(true);
         ActivityReflectiveRecordBinding binding = ActivityReflectiveRecordBinding.bind(mView);
         viewModel = new ReflectiveRecordViewModel(this,binding);
         binding.setViewModel(viewModel);
@@ -22,5 +23,10 @@ public class ReflectiveRecordActivity extends CustomActivity {
     protected void onResume() {
         super.onResume();
         viewModel.onResume();
+    }
+
+    @Override
+    public void refreshData() {
+        viewModel.lazyLoad();
     }
 }

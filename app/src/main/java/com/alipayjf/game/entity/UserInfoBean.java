@@ -86,7 +86,7 @@ public class UserInfoBean {
         private int badRecord;
         private int valid;
         private long maxFee;
-        private int minFee;
+        private long minFee;
         private String depositBankName;
         private String bankName;
         private String cardNo;
@@ -235,11 +235,11 @@ public class UserInfoBean {
             this.maxFee = maxFee;
         }
 
-        public int getMinFee() {
+        public long getMinFee() {
             return minFee;
         }
 
-        public void setMinFee(int minFee) {
+        public void setMinFee(long minFee) {
             this.minFee = minFee;
         }
 

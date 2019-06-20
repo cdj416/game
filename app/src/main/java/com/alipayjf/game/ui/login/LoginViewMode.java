@@ -1,5 +1,7 @@
 package com.alipayjf.game.ui.login;
 
+import android.text.TextUtils;
+
 import com.alipayjf.game.base.UserSession;
 import com.alipayjf.game.ui.mainpage.MainActivity;
 import com.alipayjf.game.base.Constants;
@@ -46,7 +48,7 @@ public class LoginViewMode extends CustomViewModel {
     * 登录
     * */
     private void login(){
-        /*if(TextUtils.isEmpty(binding.etPhone.getText().toString())){
+        if(TextUtils.isEmpty(binding.etPhone.getText().toString())){
             LemonBubble.showError(mActivity,"请填写手机号码！",2000);
             return;
         }
@@ -55,9 +57,9 @@ public class LoginViewMode extends CustomViewModel {
             return;
         }
         clearParams().setParams("username",binding.etPhone.getText().toString())
-                .setParams("password",binding.etPassword.getText().toString());*/
-        clearParams().setParams("username","17784495260")
-                .setParams("password","123456");
+                .setParams("password",binding.etPassword.getText().toString());
+        /*clearParams().setParams("username","17784495260")
+                .setParams("password","123456");*/
         /*clearParams().setParams("username","18183185173")
                 .setParams("password","123");*/
         Controller.postData(mActivity, Constants.LOGIN,getParams(),null, LoginBean.class,this);
@@ -73,9 +75,9 @@ public class LoginViewMode extends CustomViewModel {
                 userSession.setToken(loginBean.getResult().getToken());
                 userSession.setUsername(loginBean.getResult().getUsername());
                 SharedPreferencesUtil.putBean(mActivity,"userSession",userSession);
-                LemonBubble.hide();
-                startActivity(MainActivity.class,null);
-                mActivity.finish();
+                //startActivity(MainActivity.class,null);
+                //mActivity.finish();
+                mActivity.showSuccess("登录成功！",MainActivity.class,null);
             }else{
                 LemonBubble.showError(mActivity,loginBean.getMessage(),2000);
             }

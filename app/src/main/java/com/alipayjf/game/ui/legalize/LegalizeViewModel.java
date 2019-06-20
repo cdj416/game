@@ -10,6 +10,7 @@ import com.alipayjf.game.entity.BaseBean;
 import com.alipayjf.game.entity.RenZhengBean;
 import com.alipayjf.game.entity.UploadImgBean;
 import com.alipayjf.game.entity.UserInfoBean;
+import com.alipayjf.game.ui.mainpage.MainActivity;
 import com.google.gson.Gson;
 
 import net.lemonsoft.lemonbubble.LemonBubble;
@@ -85,22 +86,8 @@ public class LegalizeViewModel extends CustomViewModel implements SelectPictureV
     private void submitData(){
         clearHeadParams().setHeadParams("Content-Type","application/json")
                 .setHeadParams("Access-Token",userSession.getToken());
-        String dataJson;
-        if(infoBean.getResult().getStatus() == 0 || infoBean.getResult().getStatus() == 3){
-            RenZhengBean renZhengBean = new RenZhengBean();
-            renZhengBean.setId(infoBean.getResult().getId()+"");
-            RenZhengBean.WxFileBean wb = new RenZhengBean.WxFileBean();
-            wb.setUrl(infoBean.getResult().getWxCodeUrl());
-            renZhengBean.setWxFile(wb);
-
-            RenZhengBean.ZfbFileBean zb = new RenZhengBean.ZfbFileBean();
-            zb.setUrl(infoBean.getResult().getZfbCodeUrl());
-            renZhengBean.setZfbFile(zb);
-            dataJson = gson.toJson(renZhengBean);
-        }else{
-            dataJson = gson.toJson(infoBean.getResult());
-        }
-
+        infoBean.getResult().setStatus(1);
+        String dataJson = gson.toJson(infoBean.getResult());
         Controller.myRequest(Constants.SAVEUSER,dataJson,getHeadParams(), BaseBean.class,this);
     }
 
@@ -131,8 +118,12 @@ public class LegalizeViewModel extends CustomViewModel implements SelectPictureV
         }
 
         if(data instanceof BaseBean){
-            //BaseBean bean = (BaseBean)data;
-            mActivity.finish();
+            BaseBean bean = (BaseBean)data;
+            if(bean.getCode() == 200){
+                mActivity.showSuccess(bean.getMessage(), MainActivity.class,null);
+            }else{
+                LemonBubble.showError(mActivity, bean.getMessage(), 2000);
+            }
         }
     }
 

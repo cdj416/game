@@ -4,6 +4,7 @@ import android.view.KeyEvent;
 import com.alipayjf.game.R;
 import com.alipayjf.game.base.CustomActivity;
 import com.alipayjf.game.databinding.ActivityMainBinding;
+import com.alipayjf.game.util.WebSocketUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -38,5 +39,12 @@ public class MainActivity extends CustomActivity {
             return true;//不执行父类点击事件
         }
         return super.onKeyDown(keyCode, event);//继续执行父类其他点击事件
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //关闭websocket
+        WebSocketUtil.getInstance().closeConnection();
     }
 }

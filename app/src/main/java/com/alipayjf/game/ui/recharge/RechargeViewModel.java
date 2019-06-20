@@ -201,7 +201,7 @@ public class RechargeViewModel extends CustomViewModel {
             if(data instanceof FillrechargeAcountBean){
                 FillrechargeAcountBean bean = (FillrechargeAcountBean)data;
                 if(bean.getCode() == 200){
-                    mActivity.finish();
+                    mActivity.showSuccess(bean.getMessage());
                 }
             }
         }catch (Exception e){

@@ -99,7 +99,7 @@
             android:id="@+id/reflectiveRecord"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:leftText="体现记录"
+            app:leftText="提现记录"
             app:rightText="查看全部"
             app:rightImage="@mipmap/next_img"
             app:leftImage="@mipmap/reflective_record"

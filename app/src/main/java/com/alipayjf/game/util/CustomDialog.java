@@ -33,7 +33,7 @@ public class CustomDialog {
         final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
         View view = View.inflate(mContext, R.layout.dialog_go_legalize,null);
         dialog.setCanceledOnTouchOutside(false);
-        dialog.setCancelable(false);
+        //dialog.setCancelable(false);
         dialog.setContentView(view);
         Window window = dialog.getWindow();
         window.setGravity(Gravity.CENTER);
@@ -46,9 +46,11 @@ public class CustomDialog {
         String strText = "";
         if(userInfoBean.getResult().getStatus() == 0){
             strText = "请认证";
+            button.setText("前往认证");
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    dialog.dismiss();
                     if(dialogClick != null){
                         dialogClick.dialogClick(view);
                     }
@@ -57,13 +59,25 @@ public class CustomDialog {
         }
         if(userInfoBean.getResult().getStatus() == 1){
             strText = "审核中，请耐心等待！";
-            button.setBackgroundColor(0xff5F5F5F);
+            button.setText("刷新");
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                    if(dialogClick != null){
+                        dialogClick.dialogClick(view);
+                    }
+                }
+            });
+            //button.setBackgroundColor(0xff5F5F5F);
         }
         if(userInfoBean.getResult().getStatus() == 3){
+            button.setText("前往认证");
             strText = "审核失败，请重新提交审核，失败原因："+userInfoBean.getResult().getRemark();
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    dialog.dismiss();
                     if(dialogClick != null){
                         dialogClick.dialogClick(view);
                     }

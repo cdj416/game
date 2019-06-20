@@ -178,6 +178,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:textSize="14sp"
+                android:visibility="gone"
                 android:textColor="#EF0808"
                 android:text="（最大：2000）"/>
             <TextView

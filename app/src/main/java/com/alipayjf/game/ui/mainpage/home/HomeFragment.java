@@ -157,13 +157,21 @@ public class HomeFragment extends CustomFragment implements CustomDialog.DialogC
 
     @Override
     public void dialogClick(View v) {
-        Intent intent = new Intent(getContext(), LegalizeActivity.class);
-        startActivity(intent);
+        if(v instanceof TextView){
+            TextView textView = (TextView)v;
+            if(textView.getText().equals("前往认证")){
+                Intent intent = new Intent(getContext(), LegalizeActivity.class);
+                startActivity(intent);
+            }
+            if(textView.getText().equals("刷新")){
+                getUserInfo();
+            }
+        }
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onEvent(MessageEvent message) {
-        Log.e("cdj","========收到websoket消息====");
         //请求下数据
         getUserInfo();
     }
