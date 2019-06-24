@@ -67,6 +67,7 @@ public class HomeFragment extends CustomFragment implements CustomDialog.DialogC
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+
                 getSubmit(homeBean.getResult().getList().get(position).getId());
             }
         });
